@@ -35,6 +35,13 @@ interface NextContext {
     ctx?: { req: IncomingMessage };
 }
 
+interface SignInRes {
+    error: string | undefined;
+    status: number;
+    ok: boolean;
+    url: string | null;
+}
+
 declare function useSession(): [Session | null | undefined, boolean];
 declare function providers(): Promise<GetProvidersResponse | null>;
 declare const getProviders: typeof providers;
@@ -51,7 +58,7 @@ declare function signin(
     data?: GenericObject & {
         callbackUrl?: string;
     },
-): Promise<void>;
+): Promise<SignInRes | void>;
 declare const signIn: typeof signin;
 declare function signout(data?: { callbackUrl?: string }): Promise<void>;
 declare const signOut: typeof signout;
